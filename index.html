@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تسجيل الدخول - تليجرام</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f4f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .login-card {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+        .logo {
+            width: 80px;
+            height: 80px;
+            background-color: #24A1DE;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto 20px;
+            color: white;
+            font-size: 40px;
+            font-weight: bold;
+        }
+        h2 { color: #333; margin-bottom: 10px; }
+        p { color: #666; font-size: 14px; margin-bottom: 20px; }
+        input {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            box-sizing: border-box;
+            font-size: 16px;
+            text-align: center;
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #24A1DE;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        button:hover { background-color: #1e87bb; }
+        
+        /* نافذة التحذير التوعوية */
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.7);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        .alert-box {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            max-width: 450px;
+            width: 90%;
+            text-align: center;
+            border-top: 8px solid #e74c3c;
+        }
+        .alert-box h3 { color: #e74c3c; margin-top: 0; font-size: 22px; }
+        .alert-box p { color: #333; font-size: 16px; line-height: 1.6; }
+        .close-btn {
+            background-color: #e74c3c;
+            color: white;
+            padding: 10px 25px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="login-card">
+        <div class="logo">✈</div>
+        <h2>تسجيل الدخول إلى تليجرام</h2>
+        <p>الرجاء إدخال رمز التحقق (OTP) لتأكيد هويتك واستلام المكافأة</p>
+        
+        <input type="text" id="phone" placeholder="رقم الجوال">
+        <input type="password" id="otp" placeholder="أدخل رمز الـ OTP المكون من 5 أرقام">
+        <button onclick="showAlert()">تأكيد وتسجيل الدخول</button>
+    </div>
+
+    <!-- نافذة التوعية المنبثقة -->
+    <div class="overlay" id="warningOverlay">
+        <div class="alert-box">
+            <h3>⚠️ قف هنا! لقد تم اصطيادك!</h3>
+            <p>
+                هذه <b>محاكاة توعوية آمنة</b> قام بها صديقك/ابنك لحمايتك. <br><br>
+                لو كان هذا الموقع حقيقياً ويخص أحد المخترقين، لتمكن الآن من <b>سرقة حساب التليجرام الخاص بك وطردك منه فوراً</b> بمجرد إدخالك للرمز!
+            </p>
+            <p style="background: #fff3cd; padding: 10px; border-radius: 5px; font-size: 14px; color: #856404;">
+                <b>💡 قاعدة ذهبية:</b> تليجرام لا يطلب منك رمز الـ OTP أبداً في صفحة ويب خارجية أو داخل متصفح البوت. لا تدخله إلا في التطبيق الرسمي فقط!
+            </p>
+            <button class="close-btn" onclick="closeAlert()">فهمت الدرس ومستحيل أكررها!</button>
+        </div>
+    </div>
+
+    <script>
+        function showAlert() {
+            var otpValue = document.getElementById('otp').value;
+            if(otpValue.trim() === "") {
+                alert("الرجاء إدخال الرمز للتجربة");
+                return;
+            }
+            // إظهار نافذة التحذير (بدون إرسال أو حفظ أي بيانات)
+            document.getElementById('warningOverlay').style.display = 'flex';
+        }
+
+        function closeAlert() {
+            document.getElementById('warningOverlay').style.display = 'none';
+            // تفريغ الحقول لحماية الخصوصية التامة أثناء التجربة
+            document.getElementById('phone').value = '';
+            document.getElementById('otp').value = '';
+        }
+    </script>
+
+</body>
+</html>
